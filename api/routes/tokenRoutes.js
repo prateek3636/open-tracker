@@ -9,8 +9,8 @@ module.exports = function(app) {
     app.route('/token/open/:token')
         .get(tokenCtrl.openToken);
 
-    app.route('/token/stats/:token')
-        .get(tokenCtrl.openToken);
+    app.route('/token/stats')
+        .post(tokenCtrl.createStats);
 
     app.route('/token/eventLog/:token')
         .get(tokenCtrl.openToken);

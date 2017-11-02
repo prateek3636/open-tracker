@@ -8,8 +8,7 @@ var TokenSchema = new Schema({
         type: String
     },
     token: {
-        type: String,
-        default: Math.random()*10000000000000000
+        type: String
     },
     date_created: {
         type: Date,

@@ -3,10 +3,15 @@
 
 var mongoose = require('mongoose'),
     requestIp = require('request-ip'),
+    crypto = require('crypto'),
     Token = mongoose.model('token');
 
-exports.list_all_tasks = function(req, res) {
-    Token.find({}, function(err, token) {
+exports.createToken = function(req, res) {
+    var tokenString = crypto.randomBytes(20).toString('hex');
+    var newToken = new Token();
+    newToken.last_updated = new Date();
+    newToken.token = tokenString;
+    newToken.save(function(err, token) {
         if (err)
             res.send(err);
         res.json(token);
@@ -65,21 +70,29 @@ exports.openToken = function(req, res) {
 
 };
 
-
-
-
-exports.createToken = function(req, res) {
-    var newToken = new Token();
-    newToken.last_updated = new Date();
-    newToken.save(function(err, token) {
-        if (err)
+exports.createStats = function (req, res) {
+    Token.find({"is_token_clicked":true}, function(err, tokenList) {
+        if (err){
             res.send(err);
-        res.json(token);
+        }
+        var outPutList = [];
+        for(var i=0; i<tokenList.length; i++){
+            var tokenObj = {};
+            tokenObj["title"] = tokenList[i].title;
+            tokenObj["token"] = tokenList[i].token;
+            var totalCounts = 0;
+            for(var j=0; j<tokenList[i].opens.length; j++){
+                totalCounts = totalCounts + tokenList[i].opens[j].counter;
+            }
+            tokenObj["totalCounts"] = totalCounts;
+            tokenObj["uniqueCounts"] = tokenList[i].opens.length;
+            outPutList.push(tokenObj)
+        }
+        res.json(outPutList);
     });
 };
 
-
-exports.createStats = function (req, res) {
+exports.eventLog = function (req, res) {
 
 };
 
@@ -92,22 +105,3 @@ exports.read_a_task = function(req, res) {
     });
 };
 
-
-exports.update_a_task = function(req, res) {
-    Token.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err, token) {
-        if (err)
-            res.send(err);
-        res.json(token);
-    });
-};
-
-
-exports.delete_a_task = function(req, res) {
-    Token.remove({
-        _id: req.params.taskId
-    }, function(err, token) {
-        if (err)
-            res.send(err);
-        res.json({ message: 'Token successfully deleted' });
-    });
-};
