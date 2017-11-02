@@ -23,7 +23,6 @@ exports.openToken = function(req, res) {
     var userAgent = req.header('user-agent');
     var clientIpString = requestIp.getClientIp(req);
     var clientIp = clientIpString.split(":")[clientIpString.split(":").length-1];
-    // var clientIp = "2";
 
     Token.findOne({token: req.params.token}, function(err, token) {
         if (err){
@@ -93,14 +92,10 @@ exports.createStats = function (req, res) {
 };
 
 exports.eventLog = function (req, res) {
-
-};
-
-
-exports.read_a_task = function(req, res) {
-    Token.findById(req.params.taskId, function(err, token) {
-        if (err)
+    Token.findOne({token: req.params.token}, function(err, token) {
+        if (err) {
             res.send(err);
+        }
         res.json(token);
     });
 };
