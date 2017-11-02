@@ -1,0 +1,19 @@
+{
+  "name": "recruitment-open-tracker",
+  "version": "1.0.0",
+  "description": "recruitment-open-tracker app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prateek Pandey",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "mongoose": "^4.12.4",
+    "request-ip": "^2.0.2"
+  }
+}
