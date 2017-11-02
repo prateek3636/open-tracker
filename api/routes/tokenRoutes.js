@@ -4,10 +4,15 @@ module.exports = function(app) {
 
     // todoList Routes
     app.route('/token/create')
-        // .get(todoList.list_all_tasks)
         .post(tokenCtrl.createToken);
 
     app.route('/token/open/:token')
+        .get(tokenCtrl.openToken);
+
+    app.route('/token/stats/:token')
+        .get(tokenCtrl.openToken);
+
+    app.route('/token/eventLog/:token')
         .get(tokenCtrl.openToken);
 
 
