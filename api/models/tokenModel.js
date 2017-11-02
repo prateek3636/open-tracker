@@ -5,8 +5,7 @@ var Schema = mongoose.Schema;
 
 var TokenSchema = new Schema({
     title: {
-        type: String,
-        default: ""
+        type: String
     },
     token: {
         type: String,
@@ -17,8 +16,7 @@ var TokenSchema = new Schema({
         default: Date.now
     },
     last_updated: {
-        type: Date,
-        default: Date.now
+        type: Date
     },
     is_token_clicked: {
         type: Boolean,
@@ -31,9 +29,12 @@ var TokenSchema = new Schema({
             type: Number,
             default: 0
         },
-        open_date : {
+        date_created : {
             type: Date,
             default: Date.now
+        },
+        last_updated : {
+            type: Date
         },
         _id: false,
         id: false

@@ -31,6 +31,7 @@ exports.openToken = function(req, res) {
             for(var i=0; i<token.opens.length; i++){
                 if(token.opens[i].ip === clientIp && token.opens[i].user_agent === userAgent){
                     token.opens[i].counter = token.opens[i].counter+1;
+                    token.opens[i].last_updated = new Date();
                     isIpFound = true;
                     break;
                 }
@@ -40,7 +41,8 @@ exports.openToken = function(req, res) {
             var openObj = {
                 user_agent : userAgent,
                 ip : clientIp,
-                counter : 1
+                counter : 1,
+                last_updated : new Date()
             };
             if(token.opens === undefined){
                 token.opens = [];
@@ -48,22 +50,16 @@ exports.openToken = function(req, res) {
             token.opens.push(openObj);
         }
         token.is_token_clicked = true;
-        var task1 = new Token(token);
+        token.last_updated = new Date();
+        var tokenToUpdate = new Token(token);
 
-        Token.findByIdAndUpdate(id, task1, function(error, updatedTask) {
+        Token.findByIdAndUpdate(id, tokenToUpdate, function(error, updatedToken) {
             if(error) {
                 //If error found then just render the error
                 res.send(err);
             }
 
-            // Render not found error
-            if(!updatedTask) {
-                return res.status(404).json({
-                    message: 'Course with id can not be found.'
-                });
-            }
-
-            res.json(updatedTask);
+            res.json(updatedToken);
         });
     });
 
@@ -73,8 +69,9 @@ exports.openToken = function(req, res) {
 
 
 exports.createToken = function(req, res) {
-    var new_task = new Token(req.body);
-    new_task.save(function(err, token) {
+    var newToken = new Token();
+    newToken.last_updated = new Date();
+    newToken.save(function(err, token) {
         if (err)
             res.send(err);
         res.json(token);
