@@ -11,7 +11,6 @@ Technology  User
 -------------
 
 1 - Node JS
-
 2 - Mongo DB
 
 ----------
@@ -23,11 +22,8 @@ Prerequisite and Installation
 To run the app, System need to be installed node, NPM and Mongo.
 To run this app - 
 1 - Checkout the codebase
-
 2 - Go to the route Directory and run
-
 3 - npm install
-
 4 - npm run start
 
 
