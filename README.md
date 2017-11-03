@@ -41,7 +41,92 @@ Domain
 -------------
 Below are the domain structure and DB entry for a token - 
 
+    var TokenSchema = new Schema({
+    title: {
+        type: String     //Title for the token
+    },
+    token: {
+        type: String     // Alpha numeric Random generated token of length 48
+    },
+    date_created: {
+        type: Date,
+        default: Date.now
+    },
+    last_updated: {
+        type: Date
+    },
+    is_token_clicked: {
+        type: Boolean,
+        default: false
+    },
+    opens : [{
+        user_agent : String,        //  User Agent Info
+        browser : String,           //  Browser Name
+        browserVersion : String,    //  Browser version
+        ip : String,                //  Client IP
+        counter : {                 //  This counter is maintain the counts for same client request
+            type: Number,           
+            default: 0
+        }, 
+        date_created : {
+            type: Date,
+            default: Date.now
+        },
+        last_updated : {
+            type: Date
+        },
+        _id: false,
+        id: false
+    }]
+    });
 
+
+
+Now Below are the DB entries for two tokens in mongo - 
+
+
+    { 
+    "_id" : ObjectId("59fc5801b707805c92d0bb90"), 
+    "token" : "7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f", 
+    "last_updated" : ISODate("2017-11-03T12:41:29.806+0000"), 
+    "title" : "sparkline", 
+    "opens" : [
+        {
+            "user_agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36", 
+            "browser" : "Chrome", 
+            "browserVersion" : "61.0.3163.100", 
+            "ip" : "192.168.0.243", 
+            "last_updated" : ISODate("2017-11-03T12:18:14.124+0000"), 
+            "date_created" : ISODate("2017-11-03T11:50:41.686+0000"), 
+            "counter" : NumberInt(4)
+        }, 
+        {
+            "user_agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:56.0) Gecko/20100101 Firefox/56.0", 
+            "browser" : "Firefox", 
+            "browserVersion" : "56.0", 
+            "ip" : "192.168.0.243", 
+            "last_updated" : ISODate("2017-11-03T11:50:58.693+0000"), 
+            "date_created" : ISODate("2017-11-03T11:50:58.694+0000"), 
+            "counter" : NumberInt(2)
+        }
+    ], 
+    "is_token_clicked" : true, 
+    "date_created" : ISODate("2017-11-03T11:50:25.239+0000"), 
+    "__v" : NumberInt(0)
+    },
+    
+    {
+    "_id" : ObjectId("59fc612855f1a15d5eead71b"), 
+    "token" : "479c06f69623b8b442e677f8ddeb980846deb8b0", 
+    "last_updated" : ISODate("2017-11-03T12:29:28.829+0000"), 
+    "title" : "Cricket Expo", 
+    "opens" : [
+
+    ], 
+    "is_token_clicked" : false, 
+    "date_created" : ISODate("2017-11-03T12:29:28.828+0000"), 
+    "__v" : NumberInt(0)
+    }
 
 ----------
 
