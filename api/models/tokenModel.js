@@ -23,6 +23,8 @@ var TokenSchema = new Schema({
     },
     opens : [{
         user_agent : String,
+        browser : String,
+        browserVersion : String,
         ip : String,
         counter : {
             type: Number,

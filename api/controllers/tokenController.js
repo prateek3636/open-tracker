@@ -4,6 +4,8 @@
 var mongoose = require('mongoose'),
     requestIp = require('request-ip'),
     crypto = require('crypto'),
+    fs = require('fs'),
+    parser = require('ua-parser-js'),
     Token = mongoose.model('token');
 
 exports.createToken = function(req, res) {
@@ -19,7 +21,9 @@ exports.createToken = function(req, res) {
 };
 
 exports.openToken = function(req, res) {
-    console.log(req.params);
+    var ua = parser(req.headers['user-agent']);
+    var browserName = ua["browser"].name;
+    var browserVersion = ua["browser"].version;
     var userAgent = req.header('user-agent');
     var clientIpString = requestIp.getClientIp(req);
     var clientIp = clientIpString.split(":")[clientIpString.split(":").length-1];
@@ -33,7 +37,9 @@ exports.openToken = function(req, res) {
         var isIpFound = false;
         if(token.opens && token.opens.length > 0){
             for(var i=0; i<token.opens.length; i++){
-                if(token.opens[i].ip === clientIp && token.opens[i].user_agent === userAgent){
+                if(token.opens[i].ip === clientIp && token.opens[i].browser === browserName
+                    && token.opens[i].browserVersion === browserVersion){
+
                     token.opens[i].counter = token.opens[i].counter+1;
                     token.opens[i].last_updated = new Date();
                     isIpFound = true;
@@ -44,6 +50,8 @@ exports.openToken = function(req, res) {
         if(!isIpFound){
             var openObj = {
                 user_agent : userAgent,
+                browser : browserName,
+                browserVersion : browserVersion,
                 ip : clientIp,
                 counter : 1,
                 last_updated : new Date()
@@ -63,7 +71,10 @@ exports.openToken = function(req, res) {
                 res.send(err);
             }
 
-            res.json(updatedToken);
+            var img = fs.readFileSync('./images/smiley.gif');
+            res.writeHead(200, {'Content-Type': 'image/gif' });
+            res.end(img, 'binary');
+
         });
     });
 
