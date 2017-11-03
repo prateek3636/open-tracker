@@ -11,6 +11,7 @@ var mongoose = require('mongoose'),
 exports.createToken = function(req, res) {
     var tokenString = crypto.randomBytes(20).toString('hex');
     var newToken = new Token();
+    newToken.title = req.body.title;
     newToken.last_updated = new Date();
     newToken.token = tokenString;
     newToken.save(function(err, token) {
