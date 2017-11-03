@@ -131,7 +131,32 @@ Now Below are the DB entries for two tokens in mongo -
 ----------
 
 
-APIs End Point and Details
+APIs End Points and Details
 --------------------
 
+**1 - Route for token generation**
+	
+
+ - URL - http://localhost:3000/token/create
+ - Description - This API is used for creating the unique token for given title. Here title is optional. 
+ - Type - POST
+ - Request - "title" : "sparkline" (optional)   
+ -  Response - 200 OK
+
+`
+{
+    "__v": 0,
+    "token": "b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766",
+    "last_updated": "2017-11-03T13:02:37.680Z",
+    "title": "sparkline",
+    "_id": "59fc68ed05008f5e2a003316",
+    "opens": [],
+    "is_token_clicked": false,
+    "date_created": "2017-11-03T13:02:37.675Z"
+}
+`
+ 
+    
+
+ 
 
