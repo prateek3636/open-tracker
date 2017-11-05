@@ -2,7 +2,7 @@ Welcome to Open Tracker
 ===================
 
 
-Below are the details of application related to technology and domain. This application is an API app which serve all the required APIs.
+Below are the details of application Details. This application is an API app which serve all the required APIs. Below are the required informations -
 
 ----------
 
@@ -25,9 +25,10 @@ Prerequisite and Installation
 
 To run the app, System need to be installed node, NPM and Mongo.
 To run this app - 
-1 - Checkout the codebase
 
-2 - Go to the route Directory and run
+1 - Checkout/Clone the codebase
+
+2 - Go to the route Directory -  open-tracker 
 
 3 - npm install
 
@@ -239,7 +240,7 @@ APIs End Points and Details
 	
  - URL - http://localhost:3000/token/eventLog/7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f
  -  Type - GET
- - Description - This API is used for get the stats of tokens. It will return the token stats which is only opened by at-least one client. This API will response all the tokens stats provided by time interval. 
+ - Description - This API is used for get the event logs of an token. It will provide all the data of toke. We can track that which day token is created and all the opened information (date, ip, browser, etc) of token by clients.   
    
  -  Response - 200 OK
 
