@@ -2,7 +2,7 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    toeknModel = require('./api/models/tokenModel'),
+    tokenModel = require('./api/models/tokenModel'),
     bodyParser = require('body-parser');
 
 // mongoose instance connection url connection

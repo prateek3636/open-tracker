@@ -2,7 +2,7 @@
 module.exports = function(app) {
     var tokenCtrl = require('../controllers/tokenController');
 
-    // todoList Routes
+    // Token Routes
     app.route('/token/create')
         .post(tokenCtrl.createToken);
 

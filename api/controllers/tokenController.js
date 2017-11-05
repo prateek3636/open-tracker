@@ -9,10 +9,13 @@ var mongoose = require('mongoose'),
     url = require('url'),
     Token = mongoose.model('token');
 
+//Global variable for rendering
 var notFoundJson = {
     "message":"no data found"
 }
 
+
+//function for creating new token
 exports.createToken = function(req, res) {
     var tokenString = crypto.randomBytes(20).toString('hex');
     var newToken = new Token();
@@ -26,6 +29,7 @@ exports.createToken = function(req, res) {
     });
 };
 
+//function for store the information of clients
 exports.openToken = function(req, res) {
     var ua = parser(req.headers['user-agent']);
     var browserName = ua["browser"].name;
@@ -86,6 +90,7 @@ exports.openToken = function(req, res) {
 
 };
 
+//function for creating stats
 exports.createStats = function (req, res) {
     var query = url.parse(req.url,true).query;
     var toDate = new Date( Date.parse(query.to) );
@@ -115,6 +120,7 @@ exports.createStats = function (req, res) {
     });
 };
 
+//function for event log
 exports.eventLog = function (req, res) {
     Token.findOne({token: req.params.token}, function(err, token) {
         if (err) {

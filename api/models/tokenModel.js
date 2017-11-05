@@ -42,4 +42,5 @@ var TokenSchema = new Schema({
     }]
 });
 
+//exporting the modal schema
 module.exports = mongoose.model('token', TokenSchema);
