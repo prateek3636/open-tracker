@@ -5,10 +5,10 @@ var Schema = mongoose.Schema;
 
 var TokenSchema = new Schema({
     title: {
-        type: String
+        type: String     //Title for the token
     },
     token: {
-        type: String
+        type: String     // Alpha numeric Random generated token of length 48
     },
     date_created: {
         type: Date,
@@ -22,12 +22,12 @@ var TokenSchema = new Schema({
         default: false
     },
     opens : [{
-        user_agent : String,
-        browser : String,
-        browserVersion : String,
-        ip : String,
+        user_agent : String,        //  User Agent Info
+        browser : String,           //  Browser Name
+        browserVersion : String,    //  Browser version
+        ip : String,                //  Client IP
         counter : {
-            type: Number,
+            type: Number,           //  This counter is maintain the counts for same client request
             default: 0
         },
         date_created : {
