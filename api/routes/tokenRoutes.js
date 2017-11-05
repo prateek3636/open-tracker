@@ -10,7 +10,7 @@ module.exports = function(app) {
         .get(tokenCtrl.openToken);
 
     app.route('/token/stats')
-        .post(tokenCtrl.createStats);
+        .get(tokenCtrl.createStats);
 
     app.route('/token/eventLog/:token')
         .get(tokenCtrl.eventLog);
