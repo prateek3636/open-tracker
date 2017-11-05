@@ -138,7 +138,19 @@ APIs End Points and Details
 	
 
  - URL - http://localhost:3000/token/create
- - Description - This API is used for creating the unique token for given title. Here title is optional. 
+ - Description - This API is used for creating the unique token for given title. Once this api is hit, It will create an entry in mongo with **"is_token_clicked":false** and create an empty array **"opens":[]**. We will use this empty array to store the information of clients when token url has been hit. Here title is optional. 
+ - DB Entry - 
+ 
+ `{
+	"_id" : ObjectId("59fc68ed05008f5e2a003316"),
+	"token" : "b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766",
+	"last_updated" : ISODate("2017-11-03T13:02:37.680Z"),
+	"title" : "sparkline",
+	"opens" : [ ],
+	"is_token_clicked" : false,
+	"date_created" : ISODate("2017-11-03T13:02:37.675Z"),
+	"__v" : 0
+}`
  - Type - POST
  - Request - "title" : "sparkline" (optional)   
  -  Response - 200 OK
