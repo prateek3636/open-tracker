@@ -227,7 +227,7 @@ APIs End Points and Details
         "uniqueCounts": 2
     },
     {
-        "title": "sparkline",
+        "title": "nokia",
         "token": "4e1ldce3er2aebg2e1d3ae60a2qwe6hbe3debfq",
         "totalCounts": 49,
         "uniqueCounts": 23
@@ -238,7 +238,7 @@ APIs End Points and Details
 
 **4 - Route for accessing detailed event logs (for one token)**
 	
- - URL - http://localhost:3000/token/eventLog/7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f
+ - URL - http://localhost:3000/token/eventLog/b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766
  -  Type - GET
  - Description - This API is used for get the event logs of an token. It will provide all the data of toke. We can track that which day token is created and all the opened information (date, ip, browser, etc) of token by clients.   
    
@@ -247,7 +247,7 @@ APIs End Points and Details
     ```json
     {
     "_id": "59fc5801b707805c92d0bb90",
-    "token": "7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f",
+    "token": "b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766",
     "last_updated": "2017-11-05T06:27:33.039Z",
     "title": "sparkline",
     "__v": 0,
