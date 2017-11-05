@@ -84,7 +84,8 @@ Below are the domain structure and DB entry for a token -
 
 Now Below are the DB entries for two tokens in mongo - 
 
- ```json
+ 
+
     { 
     "_id" : ObjectId("59fc5801b707805c92d0bb90"), 
     "token" : "7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f", 
@@ -127,7 +128,7 @@ Now Below are the DB entries for two tokens in mongo -
     "date_created" : ISODate("2017-11-03T12:29:28.828+0000"), 
     "__v" : NumberInt(0)
     }
-    ```
+    
 
 ----------
 
