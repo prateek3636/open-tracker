@@ -12,9 +12,7 @@ Technology  User
 
 1 - Node JS
 
-2 - NPM
-
-3 - Mongo DB
+2 - Mongo DB
 
 
 ----------
