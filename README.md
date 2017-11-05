@@ -222,7 +222,7 @@ APIs End Points and Details
     [
     {
         "title": "sparkline",
-        "token": "7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f",
+        "token": "b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766",
         "totalCounts": 7,
         "uniqueCounts": 2
     },
