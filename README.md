@@ -138,6 +138,8 @@ APIs End Points and Details
 	
 
  - URL - http://localhost:3000/token/create
+ - Type - POST
+ - Request Body- "title" : "sparkline" (optional)   
  - Description - This API is used for creating the unique token for given title. Once this api is hit, It will create an entry in mongo with **"is_token_clicked":false** and create an empty array **"opens":[]**. We will use this empty array to store the information of clients when token url has been hit. Here title is optional. 
  - DB Entry - 
  
@@ -151,8 +153,7 @@ APIs End Points and Details
 	"date_created" : ISODate("2017-11-03T13:02:37.675Z"),
 	"__v" : 0
 }`
- - Type - POST
- - Request - "title" : "sparkline" (optional)   
+ 
  -  Response - 200 OK
 
 `
@@ -167,6 +168,37 @@ APIs End Points and Details
     "date_created": "2017-11-03T13:02:37.675Z"
 }
 `
+
+**2 - Route visited by end-clients**
+	
+ - URL - http://localhost:3000/token/open/b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766
+ -  Type - GET
+ - Description - This API is used when end client visit on the token url. Once this api is hit, It will update an entry in mongo with **"is_token_clicked":true** and push client details in array **"opens":[]**. 
+ - DB Entry - 
+ 
+ `{
+	"_id" : ObjectId("59fc68ed05008f5e2a003316"),
+	"token" : "b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766",
+	"last_updated" : ISODate("2017-11-03T13:04:37.680Z"),
+	"title" : "sparkline",
+	"opens" : [ 
+		{
+            "user_agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36", 
+            "browser" : "Chrome", 
+            "browserVersion" : "61.0.3163.100", 
+            "ip" : "192.168.0.21", 
+            "last_updated" : ISODate("2017-11-03T12:18:14.124+0000"), 
+            "date_created" : ISODate("2017-11-03T11:50:41.686+0000"), 
+            "counter" : NumberInt(1)
+        }
+	],
+	"is_token_clicked" : true,
+	"date_created" : ISODate("2017-11-03T13:02:37.675Z"),
+	"__v" : 0
+}`
+   
+ -  Response - After clicking server will return GIF image to the client. Below is the response.
+![enter image description here](https://github.com/prateek3636/open-tracker/blob/master/images/Screen%20Shot%202017-11-05%20at%2012.23.23%20PM.png)
  
     
 
