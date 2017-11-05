@@ -210,9 +210,9 @@ APIs End Points and Details
 
 **3 - Route for accessing stats**
 	
- - URL - http://localhost:3000/token/stats
- -  Type - GET
- - Description - This API is used for get the stats of tokens. It will return the token stats which is only opened by at-least one client. This API will response all the tokens stats provided by time interval. 
+ - URL - http://localhost:3000/token/stats?from=11/03/2017 11:50:25&to=11/04/2017 11:50:25
+ - Type - GET
+ - Description - This API is used for get the stats of tokens. It will return the token stats which is only opened by at-least one client. This API will response all the tokens stats provided by time interval. Currently it only support date formats mm-dd-yyyy HH:mm:ss
    
  -  Response - 200 OK
  

@@ -6,7 +6,12 @@ var mongoose = require('mongoose'),
     crypto = require('crypto'),
     fs = require('fs'),
     parser = require('ua-parser-js'),
+    url = require('url'),
     Token = mongoose.model('token');
+
+var notFoundJson = {
+    "message":"no data found"
+}
 
 exports.createToken = function(req, res) {
     var tokenString = crypto.randomBytes(20).toString('hex');
@@ -82,9 +87,16 @@ exports.openToken = function(req, res) {
 };
 
 exports.createStats = function (req, res) {
-    Token.find({"is_token_clicked":true}, function(err, tokenList) {
+    var query = url.parse(req.url,true).query;
+    var toDate = new Date( Date.parse(query.to) );
+    var fromDate = new Date( Date.parse(query.from) );
+    Token.find({"is_token_clicked":true, 'date_created':{$gt: fromDate, $lt:toDate}}, function(err, tokenList) {
         if (err){
             res.send(err);
+        }
+        if (tokenList.length === 0){
+            res.json(notFoundJson);
+            return;
         }
         var outPutList = [];
         for(var i=0; i<tokenList.length; i++){
