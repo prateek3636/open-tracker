@@ -84,7 +84,7 @@ Below are the domain structure and DB entry for a token -
 
 Now Below are the DB entries for two tokens in mongo - 
 
-
+ ```json
     { 
     "_id" : ObjectId("59fc5801b707805c92d0bb90"), 
     "token" : "7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f", 
@@ -127,6 +127,7 @@ Now Below are the DB entries for two tokens in mongo -
     "date_created" : ISODate("2017-11-03T12:29:28.828+0000"), 
     "__v" : NumberInt(0)
     }
+    ```
 
 ----------
 
@@ -143,7 +144,8 @@ APIs End Points and Details
  - Description - This API is used for creating the unique token for given title. Once this api is hit, It will create an entry in mongo with **"is_token_clicked":false** and create an empty array **"opens":[]**. We will use this empty array to store the information of clients when token url has been hit. Here title is optional. 
  - DB Entry - 
  
- `{
+  ```json
+ {
 	"_id" : ObjectId("59fc68ed05008f5e2a003316"),
 	"token" : "b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766",
 	"last_updated" : ISODate("2017-11-03T13:02:37.680Z"),
@@ -152,11 +154,12 @@ APIs End Points and Details
 	"is_token_clicked" : false,
 	"date_created" : ISODate("2017-11-03T13:02:37.675Z"),
 	"__v" : 0
-}`
+}
+```
  
  -  Response - 200 OK
 
-`
+ ```json
 {
     "__v": 0,
     "token": "b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766",
@@ -167,7 +170,7 @@ APIs End Points and Details
     "is_token_clicked": false,
     "date_created": "2017-11-03T13:02:37.675Z"
 }
-`
+```
 
 **2 - Route visited by end-clients**
 	
@@ -176,7 +179,8 @@ APIs End Points and Details
  - Description - This API is used when end client visit on the token url. Once this api is hit, It will update an entry in mongo with **"is_token_clicked":true** and push client details in array **"opens":[]**. 
  - DB Entry - 
  
- `{
+  ```json
+  {
 	"_id" : ObjectId("59fc68ed05008f5e2a003316"),
 	"token" : "b89e04898bb4f3e5b3ae5d0b9a69c171ddc47766",
 	"last_updated" : ISODate("2017-11-03T13:04:37.680Z"),
@@ -195,10 +199,81 @@ APIs End Points and Details
 	"is_token_clicked" : true,
 	"date_created" : ISODate("2017-11-03T13:02:37.675Z"),
 	"__v" : 0
-}`
+ }
+ ```
    
  -  Response - After clicking server will return GIF image to the client. Below is the response.
+ 
 ![enter image description here](https://github.com/prateek3636/open-tracker/blob/master/images/Screen%20Shot%202017-11-05%20at%2012.23.23%20PM.png)
+ 
+
+**3 - Route for accessing stats**
+	
+ - URL - http://localhost:3000/token/stats
+ -  Type - GET
+ - Description - This API is used for get the stats of tokens. It will return the token stats which is only opened by at-least one client. This API will response all the tokens stats provided by time interval. 
+   
+ -  Response - 200 OK
+ 
+ 
+ ```json
+    [
+    {
+        "title": "sparkline",
+        "token": "7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f",
+        "totalCounts": 7,
+        "uniqueCounts": 2
+    },
+    {
+        "title": "sparkline",
+        "token": "4e1ldce3er2aebg2e1d3ae60a2qwe6hbe3debfq",
+        "totalCounts": 49,
+        "uniqueCounts": 23
+    }
+   ]
+   ```
+
+
+**4 - Route for accessing detailed event logs (for one token)**
+	
+ - URL - http://localhost:3000/token/eventLog/7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f
+ -  Type - GET
+ - Description - This API is used for get the stats of tokens. It will return the token stats which is only opened by at-least one client. This API will response all the tokens stats provided by time interval. 
+   
+ -  Response - 200 OK
+
+    ```json
+    {
+    "_id": "59fc5801b707805c92d0bb90",
+    "token": "7013dc21e12aeb72e0d3ae60a23aaa21be8dfb6f",
+    "last_updated": "2017-11-05T06:27:33.039Z",
+    "title": "sparkline",
+    "__v": 0,
+    "opens": [
+        {
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36",
+            "browser": "Chrome",
+            "browserVersion": "61.0.3163.100",
+            "ip": "1",
+            "last_updated": "2017-11-03T12:18:14.124Z",
+            "date_created": "2017-11-03T11:50:41.686Z",
+            "counter": 4
+        },
+        {
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:56.0) Gecko/20100101 Firefox/56.0",
+            "browser": "Firefox",
+            "browserVersion": "56.0",
+            "ip": "1",
+            "last_updated": "2017-11-05T06:27:33.039Z",
+            "date_created": "2017-11-03T11:50:58.694Z",
+            "counter": 3
+        }
+    ],
+    "is_token_clicked": true,
+    "date_created": "2017-11-03T11:50:25.239Z"
+    }
+    ```
+
  
     
 
